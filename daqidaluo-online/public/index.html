@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>大起大落 · 联机版</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="flash"></div>
+
+<!-- 入口：建房 / 加入 -->
+<section id="entry" class="screen active">
+  <div class="logo"><h1>大起大落</h1><p>联 机 版</p></div>
+  <div class="card">
+    <label for="nameInput">你的名字</label>
+    <input type="text" id="nameInput" maxlength="8" value="玩家">
+    <button class="btn-main" id="createBtn" style="margin-top:14px;">创 建 房 间</button>
+    <div class="join-row">
+      <input type="text" id="codeInput" placeholder="输入 4 位房间码" maxlength="4" inputmode="numeric">
+      <button id="joinBtn" class="btn-ghost">加入</button>
+    </div>
+    <div class="err" id="entryError"></div>
+    <div class="hint">房主创建房间后把 4 位房间码告诉朋友，同一 WiFi 下打开本页即可加入。</div>
+  </div>
+</section>
+
+<!-- 房间：大厅 / 对局 -->
+<section id="room" class="screen">
+  <div class="topbar">
+    <div>
+      <div class="title">大 起 大 落 <span class="room-code" id="roomCode"></span></div>
+      <div class="meta" id="roundMeta"></div>
+    </div>
+    <button class="btn-ghost" id="quitBtn">撤离</button>
+  </div>
+
+  <div class="layout">
+    <!-- 左：玩家席 -->
+    <div class="panel players-panel">
+      <h3>玩 家 席</h3>
+      <div id="players"></div>
+      <div id="lobbyCtrl"></div>
+    </div>
+
+    <!-- 中：日志 -->
+    <div class="panel log-panel">
+      <h3>风 浪 日 志</h3>
+      <div id="log"></div>
+    </div>
+
+    <!-- 右：赌桌 -->
+    <div class="panel stage">
+      <div class="turn-name" id="turnName">—</div>
+      <div class="turn-sub" id="turnSub">—</div>
+
+      <div class="coin-wrap">
+        <div class="coin" id="coin">
+          <div class="face front">正</div>
+          <div class="face back">反</div>
+        </div>
+      </div>
+
+      <div class="pot-box">
+        <div class="pot-label">桌 上 筹 码</div>
+        <div class="pot-val dim" id="potVal">0</div>
+      </div>
+
+      <div class="streak" id="streak"></div>
+
+      <div class="stake-box" id="stakeBox">
+        <div class="stake-top">
+          <span class="lab">本 手 押 注</span>
+          <span class="num" id="stakeNum">0</span>
+          <span class="pct" id="stakePct">全押 100%</span>
+        </div>
+        <input type="range" id="stakeRange" min="1" max="100" step="1" value="100" aria-label="押注比例">
+        <div class="stake-quick" id="stakeQuick"></div>
+        <div class="stake-note" id="stakeNote"></div>
+      </div>
+
+      <div class="actions" id="actions"></div>
+      <div id="borrowSlot"></div>
+      <div class="hint" id="hintLine">等房主开局…</div>
+    </div>
+  </div>
+</section>
+
+<!-- 借钱面板 -->
+<template id="borrowTpl">
+  <div class="panel borrow" id="borrowPanel" style="margin-top:14px;">
+    <h3>抵 押 借 钱（先选物品，再选杠杆）</h3>
+    <div class="borrow-items">
+      <div class="borrow-items-label">选一件要押的物品：</div>
+      <div class="borrow-tags" id="borrowTags"></div>
+    </div>
+    <div class="lev-row" id="levRow"></div>
+  </div>
+</template>
+
+<!-- 结算排行榜 -->
+<div id="over">
+  <div class="over-box">
+    <h2>🏆 结 算 排 行 榜</h2>
+    <div class="sub" id="overSub">按总资产排名 · 负债已扣除</div>
+    <div id="recapList"></div>
+    <div class="over-actions">
+      <button class="btn-main" id="againBtn">再 来 一 局</button>
+    </div>
+  </div>
+</div>
+
+<script src="client.js"></script>
+</body>
+</html>
