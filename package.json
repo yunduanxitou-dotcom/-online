@@ -1,0 +1,13 @@
+{
+  "name": "daqidaluo-online",
+  "version": "1.0.0",
+  "private": true,
+  "description": "《大起大落》联机版 · 零依赖 Node 服务器",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
